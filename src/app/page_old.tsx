@@ -3,7 +3,6 @@
 import { projects } from '@/data/projects';
 import ProjectCard from '@/components/ui/project-card';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 
 export default function HomePage() {
   const featuredProjects = projects.filter(project => project.featured);
@@ -18,7 +17,7 @@ export default function HomePage() {
               Gen AI Projects
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-              Explore innovative AI solutions that push the boundaries of what's possible. 
+              Explore innovative AI solutions that push the boundaries of what&apos;s possible. 
               From intelligent chatbots to creative tools - welcome to the future of AI.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

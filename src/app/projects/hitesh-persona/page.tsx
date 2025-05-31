@@ -75,9 +75,8 @@ export default function HiteshPersonaPage() {
                 <h3 className="text-xl font-bold mb-4 text-white">Try These Questions</h3>
                 <div className="space-y-3">
                   {hiteshPersona.examples.map((example, index) => (
-                    <div key={index} className="bg-gray-800 border border-gray-700 rounded-lg p-3">
-                      <p className="text-sm font-medium text-white mb-2">
-                        "{example.user}"
+                    <div key={index} className="bg-gray-800 border border-gray-700 rounded-lg p-3">                      <p className="text-sm font-medium text-white mb-2">
+                        &quot;{example.user}&quot;
                       </p>
                       <p className="text-xs text-gray-400 italic">
                         Expected style: {example.assistant.substring(0, 60)}...
@@ -93,7 +92,7 @@ export default function HiteshPersonaPage() {
                 <ul className="space-y-2 text-sm text-yellow-200">
                   <li>• Ask about coding concepts, tech trends, or career advice</li>
                   <li>• Expect Hinglish responses with chai references ☕</li>
-                  <li>• Don't expect complete code solutions - learn by doing!</li>
+                  <li>• Don&apos;t expect complete code solutions - learn by doing!</li>
                   <li>• Ask follow-up questions for detailed explanations</li>
                 </ul>
               </div>
@@ -117,7 +116,7 @@ export default function HiteshPersonaPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Why This AI Persona?</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Experience authentic tech education with Hitesh's unique teaching philosophy
+              Experience authentic tech education with Hitesh&apos;s unique teaching philosophy
             </p>
           </div>
           

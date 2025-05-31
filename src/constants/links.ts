@@ -129,12 +129,12 @@ export const ALL_LINKS = {
 
 // Helper function to get a link by path
 export const getLink = (category: keyof typeof ALL_LINKS, key: string): string => {
-  const categoryLinks = ALL_LINKS[category] as any;
+  const categoryLinks = ALL_LINKS[category] as Record<string, { url?: string }>;
   return categoryLinks[key]?.url || "#";
 };
 
 // Helper function to get a link label by path
 export const getLinkLabel = (category: keyof typeof ALL_LINKS, key: string): string => {
-  const categoryLinks = ALL_LINKS[category] as any;
+  const categoryLinks = ALL_LINKS[category] as Record<string, { label?: string }>;
   return categoryLinks[key]?.label || key;
 };

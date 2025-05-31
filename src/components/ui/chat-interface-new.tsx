@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { ChatMessage } from '@/types';
-import { ChatLimitManager, CHAT_LIMITS } from '@/utils/chat-limits';
+import { ChatLimitManager } from '@/utils/chat-limits';
 import ApiKeyInput from './api-key-input';
 
 interface ChatInterfaceProps {

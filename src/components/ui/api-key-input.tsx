@@ -71,7 +71,7 @@ export default function ApiKeyInput({ onApiKeySet, onCancel }: ApiKeyInputProps)
             API Key Required
           </h3>
           <p className="text-gray-400 text-sm">
-            You've reached the free message limit. Please enter your OpenAI API key to continue chatting.
+            You&apos;ve reached the free message limit. Please enter your OpenAI API key to continue chatting.
           </p>
         </div>
 
@@ -103,7 +103,7 @@ export default function ApiKeyInput({ onApiKeySet, onCancel }: ApiKeyInputProps)
                 <ol className="list-decimal list-inside space-y-1 text-xs">
                   <li>Visit <a href={API_LINKS.openai.apiKeys} target="_blank" rel="noopener noreferrer" className="underline text-blue-400 hover:text-blue-300">platform.openai.com/api-keys</a></li>
                   <li>Sign in to your OpenAI account</li>
-                  <li>Click "Create new secret key"</li>
+                  <li>Click &quot;Create new secret key&quot;</li>
                   <li>Copy and paste the key here</li>
                 </ol>
               </div>

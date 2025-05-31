@@ -31,18 +31,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         valid: true,
         message: 'API key is valid'
-      });
-    } catch (error: any) {
+      });    } catch (error: unknown) {
       console.error('API key validation error:', error);
       
-      if (error.status === 401) {
+      const apiError = error as { status?: number };
+      
+      if (apiError.status === 401) {
         return NextResponse.json(
           { error: 'Invalid API key. Please check your key and try again.' },
           { status: 401 }
         );
       }
       
-      if (error.status === 429) {
+      if (apiError.status === 429) {
         return NextResponse.json(
           { error: 'API key quota exceeded. Please check your OpenAI billing.' },
           { status: 429 }

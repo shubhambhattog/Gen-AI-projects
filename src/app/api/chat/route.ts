@@ -5,7 +5,7 @@ import { CHAT_LIMITS } from '@/utils/chat-limits';
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages, personaId = 'hitesh-choudhary', userApiKey, sessionData } = await request.json();
+    const { messages, userApiKey, sessionData } = await request.json();
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(

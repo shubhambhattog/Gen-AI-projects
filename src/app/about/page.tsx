@@ -23,13 +23,13 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-white mb-6">Our Mission</h2>
               <p className="text-gray-300 mb-4">
                 This project portfolio represents a comprehensive exploration of generative artificial intelligence 
-                capabilities. As part of a Gen AI cohort, we're building innovative solutions that demonstrate 
+                capabilities. As part of a Gen AI cohort, we&apos;re building innovative solutions that demonstrate 
                 the practical applications of modern AI technologies.
               </p>
               <p className="text-gray-300">
                 Each project showcases different aspects of AI - from conversational interfaces and persona 
                 creation to creative tools and developer utilities. Our goal is to push the boundaries of 
-                what's possible with AI while maintaining a focus on user experience and practical utility.
+                what&apos;s possible with AI while maintaining a focus on user experience and practical utility.
               </p>
             </div>            <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 mb-8">
               <h2 className="text-3xl font-bold text-white mb-6">Tech Stack</h2>
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </div>            <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 mb-8">
               <h2 className="text-3xl font-bold text-white mb-6">Featured Project: Hitesh Persona</h2>
               <p className="text-gray-300 mb-4">
-                Our flagship project is an AI persona that accurately emulates Hitesh Choudhary's unique 
+                Our flagship project is an AI persona that accurately emulates Hitesh Choudhary&apos;s unique 
                 teaching style. This includes:
               </p>
               <ul className="space-y-2 text-gray-300 mb-4">
