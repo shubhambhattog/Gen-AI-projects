@@ -16,17 +16,19 @@ export default function ChatInterface({ personaName, personaDescription, persona
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [session, setSession] = useState(() => ChatLimitManager.getSession());
-  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
+  const [session, setSession] = useState(() => ChatLimitManager.getSession());  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Only scroll to bottom if we should auto-scroll and there are messages
+    if (shouldAutoScroll && messages.length > 0) {
+      scrollToBottom();
+      setShouldAutoScroll(false);
+    }
+  }, [messages, shouldAutoScroll]);
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -41,11 +43,10 @@ export default function ChatInterface({ personaName, personaDescription, persona
       role: 'user',
       content: input,
       timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
+    };    setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setShouldAutoScroll(true);
 
     try {
       const response = await fetch('/api/chat', {
@@ -78,31 +79,24 @@ export default function ChatInterface({ personaName, personaDescription, persona
       };
 
       setMessages(prev => [...prev, assistantMessage]);
+      setShouldAutoScroll(true);
       
       // Update session message count
       const updatedSession = ChatLimitManager.incrementMessageCount();
       setSession(updatedSession);
       
     } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage: ChatMessage = {
+      console.error('Error sending message:', error);      const errorMessage: ChatMessage = {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
+      setShouldAutoScroll(true);
     } finally {
       setIsLoading(false);
     }
   };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  };
-
   const clearChat = () => {
     setMessages([]);
   };
@@ -225,12 +219,21 @@ export default function ChatInterface({ personaName, personaDescription, persona
           <div ref={messagesEndRef} />
         </div>        {/* Input Area */}
         <div className="p-4 border-t border-gray-800 bg-gray-900">
-          <div className="flex space-x-2">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (ChatLimitManager.hasReachedLimit()) {
+                setShowApiKeyInput(true);
+              } else {
+                sendMessage();
+              }
+            }}
+            className="flex space-x-2"
+          >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
               placeholder={
                 ChatLimitManager.hasReachedLimit() 
                   ? "Add your API key to continue chatting..." 
@@ -240,7 +243,7 @@ export default function ChatInterface({ personaName, personaDescription, persona
               className="flex-1 p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed"
             />
             <button
-              onClick={ChatLimitManager.hasReachedLimit() ? () => setShowApiKeyInput(true) : sendMessage}
+              type="submit"
               disabled={isLoading || (!input.trim() && !ChatLimitManager.hasReachedLimit())}
               className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             >
@@ -252,7 +255,7 @@ export default function ChatInterface({ personaName, personaDescription, persona
                 <Send size={16} />
               )}
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </>
