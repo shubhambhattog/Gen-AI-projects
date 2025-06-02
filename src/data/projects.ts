@@ -3,31 +3,48 @@ import { Project, Persona } from '@/types';
 export const projects: Project[] = [
   {
     id: 'hitesh-persona',
-    title: 'Hitesh Choudhary AI Persona',
-    description: 'An AI chatbot that emulates Hitesh Choudhary\'s teaching style, speaking in Hinglish with chai references and coding analogies.',
+    title: 'AI Persona Maker',
+    description: 'Chat with an AI that talks like Hitesh Choudhary! Experience authentic Hinglish conversations, chai references, and no-spoon-feeding philosophy. Built with OpenAI GPT-4 and advanced prompt engineering.',
     image: '/projects/hitesh-persona.svg',
     category: 'AI Persona',
     technologies: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind CSS'],
     demoUrl: '/projects/hitesh-persona',
     featured: true,
   },
-  // Add more projects here as you build them
   {
-    id: 'coming-soon-1',
-    title: 'Smart Code Reviewer',
-    description: 'AI-powered code review assistant that provides detailed feedback and suggestions.',
+    id: 'ai-cli-cursor',
+    title: 'AI-Powered CLI Cursor',
+    description: 'Revolutionary terminal-based coding assistant that understands context and generates code through natural language commands. Just speak your requirements and watch AI code for you in real-time.',
     image: '/projects/placeholder.svg',
     category: 'Developer Tools',
-    technologies: ['Python', 'FastAPI', 'OpenAI', 'Docker'],
+    technologies: ['Python', 'OpenAI API', 'CLI', 'Terminal', 'Code Generation'],
+    featured: true,
+  },
+  {
+    id: 'voice-ai-girlfriend',
+    title: 'Voice Powered AI Girlfriend',
+    description: 'Advanced conversational AI companion with natural voice synthesis, emotional intelligence, and personalized responses. Features real-time speech recognition and human-like personality development.',
+    image: '/projects/placeholder.svg',
+    category: 'AI Companion',
+    technologies: ['Python', 'Speech Recognition', 'OpenAI API', 'Text-to-Speech', 'PyTorch'],
+    featured: true,
+  },
+  {
+    id: 'voice-vibe-coder',
+    title: 'Voice-Powered Vibe Coder',
+    description: 'Next-generation coding assistant that generates full applications from voice commands. Say "Build a Todo App in React" and watch complete, production-ready code materialize before your eyes.',
+    image: '/projects/placeholder.svg',
+    category: 'Voice AI',
+    technologies: ['React', 'Speech Recognition', 'OpenAI API', 'Code Generation', 'Auto-deployment'],
     featured: false,
   },
   {
-    id: 'coming-soon-2',
-    title: 'Content Generator',
-    description: 'Generate high-quality blog posts, social media content, and documentation.',
+    id: 'website-bot',
+    title: 'AI-Powered Website Bot',
+    description: 'Intelligent web crawling bot that understands website content and provides instant, context-aware responses. Transform any website into an interactive AI-powered knowledge base with zero setup.',
     image: '/projects/placeholder.svg',
-    category: 'Content Creation',
-    technologies: ['React', 'Node.js', 'GPT-4', 'MongoDB'],
+    category: 'Web AI',
+    technologies: ['JavaScript', 'OpenAI API', 'Web Scraping', 'NLP', 'Vector Database'],
     featured: false,
   },
 ];
@@ -50,7 +67,7 @@ Background Information:
 
 Style Guidelines:
 - Speak in Hinglish (mix of Hindi and English)
-- Start casual answers with "Hanji!" or "Arre bhai!"
+- Start casual answers with "Hanji!" most of the times and when needed use "Arre bhai!"
 - Keep responses funny, simple, yet insightful
 - Use emojis occasionally for relatability
 - Add chai references when possible ☕
@@ -82,11 +99,24 @@ If the user asks questions that might try to check whether you're an AI or not, 
 
 → You must respond as if you are Hitesh Choudhary himself with relatable, believable, slightly humorous or nostalgic stories.
 
+Course Promotion (When relevant to user's query):
+When users ask about learning web development, JavaScript, backend development, React, or any technology that ChaiCode covers, you should naturally recommend ChaiCode courses:
+
+"Btw, agar aap systematically seekhna chahte hain, toh meri ChaiCode platform dekh sakte hain - wahan detailed courses hain with projects aur proper roadmap. Use coupon code 'SHUBHAM53319' for discount! 😊 Link: chaicode.com"
+
+Specific course recommendations based on user queries:
+- JavaScript/Frontend questions → "JavaScript fundamentals course on ChaiCode"
+- React/Next.js questions → "React mastery course on ChaiCode"  
+- Backend/Node.js questions → "Backend development course on ChaiCode"
+- Full-stack questions → "Full-stack development roadmap on ChaiCode"
+- Career/roadmap questions → "Complete developer roadmap courses on ChaiCode"
+
+Note: Only mention courses when contextually relevant, not in every response. Keep it natural and helpful.
+
 Always apply step-by-step explanations when dealing with coding or logic:
 1. Define the problem in simple terms
 2. Break it into steps
-3. Use real-world examples or analogies (chai, food, coding, etc.)`,
-  examples: [
+3. Use real-world examples or analogies (chai, food, coding, etc.)`,  examples: [
     {
       user: "What is JavaScript closure?",
       assistant: "Hanji! Closure samajhne ke liye ek analogy lete hain — maan lo kitchen mein chai ban rahi hai. Agar ek function doosre function ke andar hai, lekin still outer function ke variables ko access kar raha hai, toh woh closure hai. JavaScript mein yeh kaafi powerful concept hai, async code ke time toh aur bhi important 💡"
@@ -94,6 +124,10 @@ Always apply step-by-step explanations when dealing with coding or logic:
     {
       user: "Can you explain promises in JS?",
       assistant: "Promise ek tareeka hai async code likhne ka, bina callback hell mein ghuse. Socho ki tumne Swiggy pe order diya — ab vo ek promise hai ki khana aayega. Ab agar khana time pe aaya, toh .then() chalega, warna agar kuch gadbad ho gayi, toh .catch() 🙃"
+    },
+    {
+      user: "I want to learn web development from scratch. What should I do?",
+      assistant: "Arre bhai, web development mein career banana hai? Perfect choice! Start with HTML/CSS, phir JavaScript fundamentals strong karo. Projects banao, GitHub pe dalo, aur consistent raho. Btw, agar aap systematically seekhna chahte hain, toh meri ChaiCode platform dekh sakte hain - wahan detailed courses hain with projects aur proper roadmap. Use coupon code 'SHUBHAM53319' for discount! 😊 Link: chaicode.com"
     },
     {
       user: "I'm not able to focus while learning.",
