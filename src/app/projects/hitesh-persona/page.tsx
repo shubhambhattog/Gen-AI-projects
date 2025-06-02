@@ -49,15 +49,14 @@ export default function HiteshPersonaPage() {
       {/* Main Content */}
       <section className="py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Chat Interface */}
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">            {/* Chat Interface */}
+            <div className="lg:col-span-2 relative">
               <ChatInterface
                 personaName={hiteshPersona.name}
                 personaDescription={hiteshPersona.description}
                 personaId={hiteshPersona.id}
               />
-            </div>            {/* Sidebar Info */}
+            </div>{/* Sidebar Info */}
             <div className="space-y-6">
               {/* About Hitesh */}
               <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">

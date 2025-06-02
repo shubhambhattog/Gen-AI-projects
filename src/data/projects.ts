@@ -18,7 +18,7 @@ export const projects: Project[] = [
     image: '/projects/placeholder.svg',
     category: 'Developer Tools',
     technologies: ['Python', 'OpenAI API', 'CLI', 'Terminal', 'Code Generation'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'voice-ai-girlfriend',
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     image: '/projects/placeholder.svg',
     category: 'AI Companion',
     technologies: ['Python', 'Speech Recognition', 'OpenAI API', 'Text-to-Speech', 'PyTorch'],
-    featured: true,
+    featured: false,
   },
   {
     id: 'voice-vibe-coder',

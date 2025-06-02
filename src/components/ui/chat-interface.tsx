@@ -16,17 +16,23 @@ export default function ChatInterface({ personaName, personaDescription, persona
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [session, setSession] = useState(() => ChatLimitManager.getSession());  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
-  const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
+  const [session, setSession] = useState(() => ChatLimitManager.getSession());  const [showApiKeyInput, setShowApiKeyInput] = useState(false);  const [shouldAutoScroll, setShouldAutoScroll] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
+  
   useEffect(() => {
     // Only scroll to bottom if we should auto-scroll and there are messages
     if (shouldAutoScroll && messages.length > 0) {
-      scrollToBottom();
-      setShouldAutoScroll(false);
+      setTimeout(() => {
+        scrollToBottom();
+        setShouldAutoScroll(false);
+      }, 100);
     }
   }, [messages, shouldAutoScroll]);
 
@@ -117,10 +123,9 @@ export default function ChatInterface({ personaName, personaDescription, persona
           onCancel={() => setShowApiKeyInput(false)}
         />
       )}
-      
-      <div className="flex flex-col h-[600px] bg-gray-900 border border-gray-800 rounded-lg">
+        <div className="flex flex-col h-[600px] bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800">
+        <div className="flex items-center justify-between p-4 border-b border-gray-800 flex-shrink-0">
           <div className="flex items-center space-x-3">
             {/* Hitesh's GitHub Profile Picture */}
             <img 
@@ -175,7 +180,11 @@ export default function ChatInterface({ personaName, personaDescription, persona
             </div>
           </div>
         )}        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div 
+          ref={messagesContainerRef}
+          className="flex-1 overflow-y-auto p-4 space-y-4 overscroll-contain"
+          style={{ scrollBehavior: 'smooth' }}
+        >
           {messages.length === 0 && (
             <div className="text-center text-gray-400 mt-8">
               <p className="text-lg mb-2">👋 Start a conversation!</p>
@@ -218,10 +227,11 @@ export default function ChatInterface({ personaName, personaDescription, persona
           )}
           <div ref={messagesEndRef} />
         </div>        {/* Input Area */}
-        <div className="p-4 border-t border-gray-800 bg-gray-900">
+        <div className="p-4 border-t border-gray-800 bg-gray-900 flex-shrink-0">
           <form 
             onSubmit={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               if (ChatLimitManager.hasReachedLimit()) {
                 setShowApiKeyInput(true);
               } else {
@@ -234,6 +244,15 @@ export default function ChatInterface({ personaName, personaDescription, persona
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (!ChatLimitManager.hasReachedLimit() && input.trim()) {
+                    sendMessage();
+                  }
+                }
+              }}
               placeholder={
                 ChatLimitManager.hasReachedLimit() 
                   ? "Add your API key to continue chatting..." 
@@ -241,6 +260,7 @@ export default function ChatInterface({ personaName, personaDescription, persona
               }
               disabled={isLoading || ChatLimitManager.hasReachedLimit()}
               className="flex-1 p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-800 disabled:cursor-not-allowed"
+              autoComplete="off"
             />
             <button
               type="submit"
